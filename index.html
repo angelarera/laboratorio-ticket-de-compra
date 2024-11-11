@@ -3,13 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="./src/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
   </head>
   <body>
-    <div id="app">
-      <h1>TypeScript Sandbox</h1>
-    </div>
+    <div id="puntuacion"></div>
+    <button id="pedir-btn">Pedir una carta</button>
+    <img
+      id="carta"
+      src="https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/refs/heads/main/cartas/back.jpg"
+      alt="Reverso de carta de baraja española"
+    />
+    <div id="game-over"></div>
+    <button id="plantarse-btn">Quiero plantarme</button>
+    <div id="mensaje-final"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
