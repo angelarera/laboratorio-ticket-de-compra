@@ -172,7 +172,8 @@ body {
   border-radius: 12px;
 }
 
-.seccion-principal__btns {
+.seccion-principal__btns,
+.mensaje-final__btns {
   margin-bottom: 48px;
   display: flex;
   flex-direction: column;
@@ -180,12 +181,14 @@ body {
 
 .seccion-principal__pedir-btn,
 .seccion-principal__plantarse-btn,
-.nueva-partida-btn {
+.nueva-partida-btn,
+.mensaje-final__futuro-btn {
   font-weight: bold;
   text-transform: uppercase;
 }
 
-.seccion-principal__plantarse-btn {
+.seccion-principal__plantarse-btn,
+.mensaje-final__futuro-btn {
   margin-top: 8px;
   color: white;
   background-color: black;
@@ -197,7 +200,8 @@ body {
 
 /* Game over y mensaje plantarse */
 .game-over,
-.mensaje-final {
+.mensaje-final,
+.que-habria-pasado {
   position: fixed;
   height: 0;
   width: 100dvw;
@@ -205,12 +209,14 @@ body {
   z-index: 1;
 }
 
-.mensaje-final {
+.mensaje-final,
+.que-habria-pasado {
   background-color: #1f81ff;
 }
 
 .game-over__titulo,
-.mensaje-final__titulo {
+.mensaje-final__titulo,
+.que-habria-pasado__titulo {
   margin: 120px 0 16px 0;
   color: #ff3c3c;
   font: 700 6.5rem/100% 'Rubik', sans-serif;
@@ -219,8 +225,9 @@ body {
   opacity: 0;
 }
 
-.mensaje-final__titulo {
-  margin-bottom: 8px;
+.mensaje-final__titulo,
+.que-habria-pasado__titulo {
+  margin: 190px 0 8px 0;
   font-size: 4rem;
   color: black;
 }
@@ -233,12 +240,27 @@ body {
   opacity: 0;
 }
 
-.nueva-partida-btn {
+.mensaje-final__opciones-texto,
+.que-habria-pasado__texto {
+  text-align: center;
+  font-weight: 700;
+  color: black;
+  opacity: 0;
+}
+
+.mensaje-final__btns {
+  margin-bottom: 0;
+}
+
+.nueva-partida-btn,
+.mensaje-final__futuro-btn,
+.que-habria-pasado {
   opacity: 0;
 }
 
 .game-over.game-over--desplegado,
-.mensaje-final.mensaje-final--desplegado {
+.mensaje-final.mensaje-final--desplegado,
+.que-habria-pasado.que-habria-pasado--desplegado {
   height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -250,10 +272,29 @@ body {
 .game-over--desplegado .game-over__titulo,
 .game-over--desplegado .nueva-partida-btn,
 .mensaje-final--desplegado .mensaje-final__titulo,
+.mensaje-final--desplegado .mensaje-final__texto,
+.mensaje-final--desplegado .mensaje-final__opciones-texto,
 .mensaje-final--desplegado .nueva-partida-btn,
-.mensaje-final--desplegado .mensaje-final__texto {
+.mensaje-final--desplegado .mensaje-final__futuro-btn,
+.que-habria-pasado--desplegado .que-habria-pasado__titulo,
+.que-habria-pasado--desplegado .que-habria-pasado__texto,
+.que-habria-pasado--desplegado .nueva-partida-btn {
   opacity: 1;
   transition: opacity 1.3s 0.4s ease-in-out;
+}
+
+/* Qué habría pasado */
+.mensaje-final--viendo-futuro {
+  opacity: 0;
+}
+
+.que-habria-pasado--desplegado {
+  opacity: 1;
+  transition: opacity 0.7s ease-in-out;
+}
+
+.que-habria-pasado__texto {
+  margin-bottom: 8px;
 }
 
 @media (min-width: 768px) {
@@ -270,18 +311,21 @@ body {
     border-radius: 16px;
   }
 
-  .seccion-principal__btns {
+  .seccion-principal__btns,
+  .mensaje-final__btns {
     flex-direction: row;
   }
 
-  .seccion-principal__plantarse-btn {
+  .seccion-principal__plantarse-btn,
+  .mensaje-final__futuro-btn {
     margin-top: 0;
     margin-left: 8px;
   }
 
   /* Game over y mensaje plantarse */
   .game-over__titulo,
-  .mensaje-final__titulo {
+  .mensaje-final__titulo,
+  .que-habria-pasado__titulo {
     margin-bottom: 24px;
     font-size: 8rem;
   }

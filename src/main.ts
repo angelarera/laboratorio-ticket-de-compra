@@ -7,7 +7,7 @@ const muestraPuntuacion = () => {
     elementoPuntuacion.innerHTML = `${puntuacion}`;
   } else {
     console.error(
-      "muestraPuntuacion: No se ha encontrado el elemento con id puntuacion"
+      "muestraPuntuacion: No se ha encontrado el elemento con class puntuacion"
     );
   }
 };
@@ -106,7 +106,9 @@ const mostrarCarta = (numeroCarta: number): void => {
         break;
     }
   } else {
-    console.error("mostrarCarta: No se ha encontrado el elemento con id carta");
+    console.error(
+      "mostrarCarta: No se ha encontrado el elemento con class carta"
+    );
   }
 };
 
@@ -168,7 +170,7 @@ const mostrarMensajeFinal = () => {
     }
   } else {
     console.error(
-      "mostrarMensajeFinal: No se ha encontrado el elemento con id mensaje-final"
+      "mostrarMensajeFinal: No se ha encontrado el elemento con class mensaje-final"
     );
   }
 
@@ -176,7 +178,7 @@ const mostrarMensajeFinal = () => {
     contenedorMensajeFinal.classList.add("mensaje-final--desplegado"); // Añade la class .mensaje-final--desplegado que establece los estilos que hacen que el game over se despliegue
   } else {
     console.error(
-      "contenedorMensajeFinal: No se ha encontrado el elemento con id mensaje-final"
+      "contenedorMensajeFinal: No se ha encontrado el elemento con class mensaje-final"
     );
   }
 };
@@ -212,6 +214,10 @@ const reiniciarPartida = () => {
     contenedorMensajeFinal.classList.remove("mensaje-final--desplegado"); // Elimina la class que desplegaba el quiero plantarme
   }
 
+  if (elementoQueHabriaPasado) {
+    elementoQueHabriaPasado.classList.remove("que-habria-pasado--desplegado"); // Elimina la class que se despliega cuando se ha acabao de mostrar lo que habría pasado de no haberse plantado
+  }
+
   if (elementoPuntuacion) {
     elementoPuntuacion.innerHTML = ""; // Vacía el marcador de puntos
   }
@@ -223,6 +229,7 @@ const reiniciarPartida = () => {
   }
 };
 
+// Aplico reiniciarPartida a los botones que inician una nueva partida en cada pantalla que se puede encontrar el jugador
 const nuevaPartidaBtnGameOver = document.querySelector(
   ".game-over__nueva-partida-btn"
 );
@@ -246,5 +253,101 @@ if (
 ) {
   nuevaPartidaBtnPlantarse.addEventListener("click", () => {
     reiniciarPartida();
+  });
+}
+
+const nuevaPartidaBtnQueHabriaPasado = document.querySelector(
+  ".que-habria-pasado__nueva-partida-btn"
+);
+
+if (
+  nuevaPartidaBtnQueHabriaPasado !== null &&
+  nuevaPartidaBtnQueHabriaPasado instanceof HTMLButtonElement
+) {
+  nuevaPartidaBtnQueHabriaPasado.addEventListener("click", () => {
+    reiniciarPartida();
+  });
+}
+
+// QUÉ HABRÍA PASADO
+const mostrarMensajeFuturo = () => {
+  const queHabriaPasado = document.querySelector(".que-habria-pasado__texto");
+
+  if (queHabriaPasado !== null && queHabriaPasado instanceof HTMLDivElement) {
+    switch (true) {
+      case puntuacion === 7.5:
+        queHabriaPasado.innerText =
+          "¡Lo habrías clavado!¡El que no arriesga no gana!";
+        break;
+      case puntuacion > 7.5:
+        queHabriaPasado.innerText =
+          "Habrías superado el 7,5. A veces vale más una retirada a tiempo.";
+        break;
+      default:
+        queHabriaPasado.innerText = `Tu puntuación final es ${puntuacion}.`;
+        break;
+    }
+  } else {
+    console.error(
+      "mostrarMensajeFuturo: No se ha encontrado el elemento con class que-habria-pasado__texto"
+    );
+  }
+};
+
+const futuroBtn = document.querySelector(".mensaje-final__futuro-btn");
+let intervalId: number | undefined; // Declara un intervalo que usaremos para pulsar el botón de pedir carta y mostrar las que habrían salido de seguir jugando
+const elementoQueHabriaPasado = document.querySelector(".que-habria-pasado");
+
+const pedirCartaQueHabriaPasado = () => {
+  const carta = pedirCarta();
+  mostrarCarta(carta);
+  actualizarPuntuacion(carta);
+  muestraPuntuacion();
+
+  if (puntuacion >= 7.5) {
+    // Para el intervalo si la puntuación alcanza 7.5 o lo supera
+    clearInterval(intervalId);
+
+    if (
+      elementoQueHabriaPasado !== null &&
+      elementoQueHabriaPasado instanceof HTMLDivElement
+    ) {
+      elementoQueHabriaPasado.classList.add("que-habria-pasado--desplegado"); // Añade la class .que-habria-pasado--desplegado que establece los estilos para el mensaje de qué habría pasado
+    } else {
+      console.error(
+        "queHabriaPasado: No se ha encontrado el elemento que-habria-pasado"
+      );
+    }
+
+    mostrarMensajeFuturo();
+  }
+};
+
+const queHabriaPasado = () => {
+  if (pedirBtn !== null && pedirBtn instanceof HTMLButtonElement) {
+    pedirBtn.disabled = false; // Habilita nuevamente el botón para pedir carta
+  }
+
+  pedirCartaQueHabriaPasado();
+
+  if (contenedorMensajeFinal) {
+    contenedorMensajeFinal.classList.add("mensaje-final--viendo-futuro"); // Añade la class .mensaje-final--viendo-futuro que establece los estilos que hacen que volvamos a ver las cartas que se están jugando
+  } else {
+    console.error(
+      "contenedorMensajeFinal: No se ha encontrado el elemento con class mensaje-final"
+    );
+  }
+
+  if (intervalId === undefined && puntuacion < 7.5) {
+    // Crea el intervalo solo en caso de que la puntuación no haya alcanzado o superado 7.5 en el primer click
+    intervalId = window.setInterval(() => {
+      pedirCartaQueHabriaPasado();
+    }, 1000);
+  }
+};
+
+if (futuroBtn !== null && futuroBtn instanceof HTMLButtonElement) {
+  futuroBtn.addEventListener("click", () => {
+    queHabriaPasado();
   });
 }
