@@ -138,9 +138,10 @@ const gameOver = () => {
 };
 
 // ME PLANTO
+const contenedorMensajeFinal = document.querySelector(".mensaje-final");
+
 const mostrarMensajeFinal = () => {
   const elementoMensajeFinal = document.querySelector(".mensaje-final-texto");
-  const contenedorMensajeFinal = document.querySelector(".mensaje-final");
 
   if (
     elementoMensajeFinal !== null &&
@@ -205,8 +206,12 @@ const reiniciarPartida = () => {
     elementoGameOver.classList.remove("game-over--desplegado"); // Elimina la class que desplegaba el game over
   }
 
+  if (contenedorMensajeFinal) {
+    contenedorMensajeFinal.classList.remove("mensaje-final--desplegado"); // Elimina la class que desplegaba el quiero plantarme
+  }
+
   if (elementoPuntuacion) {
-    elementoPuntuacion.innerHTML = ""; // Vacía el marcador de puntosOlvida
+    elementoPuntuacion.innerHTML = ""; // Vacía el marcador de puntos
   }
 
   if (imagenCarta !== null && imagenCarta instanceof HTMLImageElement) {
@@ -216,10 +221,28 @@ const reiniciarPartida = () => {
   }
 };
 
-const nuevaPartidaBtn = document.querySelector(".nueva-partida-btn");
+const nuevaPartidaBtnGameOver = document.querySelector(
+  ".nueva-partida-btn--gameover"
+);
 
-if (nuevaPartidaBtn !== null && nuevaPartidaBtn instanceof HTMLButtonElement) {
-  nuevaPartidaBtn.addEventListener("click", () => {
+if (
+  nuevaPartidaBtnGameOver !== null &&
+  nuevaPartidaBtnGameOver instanceof HTMLButtonElement
+) {
+  nuevaPartidaBtnGameOver.addEventListener("click", () => {
+    reiniciarPartida();
+  });
+}
+
+const nuevaPartidaBtnPlantarse = document.querySelector(
+  ".nueva-partida-btn--plantarse"
+);
+
+if (
+  nuevaPartidaBtnPlantarse !== null &&
+  nuevaPartidaBtnPlantarse instanceof HTMLButtonElement
+) {
+  nuevaPartidaBtnPlantarse.addEventListener("click", () => {
     reiniciarPartida();
   });
 }
