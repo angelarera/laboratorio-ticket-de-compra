@@ -118,14 +118,14 @@ body {
   z-index: 2;
 }
 
-.puntuacion-titulo {
+.puntuacion__titulo {
   margin: 24px 0 16px 0;
   font-size: 2rem;
   text-transform: uppercase;
   color: white;
 }
 
-.puntuacion-contenedor-numero {
+.puntuacion__contenedor-numero {
   width: 200px;
   height: 125px;
   background-color: white;
@@ -135,13 +135,13 @@ body {
   align-items: center;
 }
 
-.puntuacion-numero {
+.puntuacion__numero {
   font: 700 6rem/125% 'Rubik', sans-serif;
   color: black;
 }
 
 /* Baraja y botones principales */
-.cartas-btns {
+.seccion-principal {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -149,13 +149,13 @@ body {
   align-items: center;
 }
 
-.baraja-cartas {
+.seccion-principal__baraja-cartas {
   margin-bottom: 24px;
   display: flex;
   align-items: center;
 }
 
-.carta-contenedor {
+.seccion-principal__carta-contenedor {
   width: 144px;
   height: 220px;
   /* Le he puesto a este elemento el tamaño de la carta que hay en su interior, para que cuando esté vacío porque aún no se ha sacado ninguna mantenga el tamaño que tiene cuando sí que se ha sacado */
@@ -166,32 +166,32 @@ body {
   border-radius: 16px;
 }
 
-.carta,
-.reverso-baraja {
+.seccion-principal__carta,
+.seccion-principal__reverso-baraja {
   height: 220px;
   border-radius: 12px;
 }
 
-.main-btns {
+.seccion-principal__btns {
   margin-bottom: 48px;
   display: flex;
   flex-direction: column;
 }
 
-.pedir-btn,
-.plantarse-btn,
+.seccion-principal__pedir-btn,
+.seccion-principal__plantarse-btn,
 .nueva-partida-btn {
   font-weight: bold;
   text-transform: uppercase;
 }
 
-.plantarse-btn {
+.seccion-principal__plantarse-btn {
   margin-top: 8px;
   color: white;
   background-color: black;
 }
 
-.plantarse-btn span {
+.seccion-principal__plantarse-btn span {
   margin-left: 4px;
 }
 
@@ -209,8 +209,8 @@ body {
   background-color: #1f81ff;
 }
 
-.game-over-titulo,
-.mensaje-final-titulo {
+.game-over__titulo,
+.mensaje-final__titulo {
   margin: 120px 0 16px 0;
   color: #ff3c3c;
   font: 700 6.5rem/100% 'Rubik', sans-serif;
@@ -219,13 +219,13 @@ body {
   opacity: 0;
 }
 
-.mensaje-final-titulo {
+.mensaje-final__titulo {
   margin-bottom: 8px;
   font-size: 4rem;
   color: black;
 }
 
-.mensaje-final-texto {
+.mensaje-final__texto {
   margin-bottom: 32px;
   color: black;
   font: 500 2rem/100% 'Rubik', sans-serif;
@@ -247,11 +247,11 @@ body {
   transition: height 0.7s ease-in-out;
 }
 
-.game-over--desplegado .game-over-titulo,
+.game-over--desplegado .game-over__titulo,
 .game-over--desplegado .nueva-partida-btn,
-.mensaje-final--desplegado .mensaje-final-titulo,
+.mensaje-final--desplegado .mensaje-final__titulo,
 .mensaje-final--desplegado .nueva-partida-btn,
-.mensaje-final--desplegado .mensaje-final-texto {
+.mensaje-final--desplegado .mensaje-final__texto {
   opacity: 1;
   transition: opacity 1.3s 0.4s ease-in-out;
 }
@@ -259,38 +259,38 @@ body {
 @media (min-width: 768px) {
 
   /* Baraja y botones principales */
-  .carta-contenedor {
+  .seccion-principal__carta-contenedor {
     width: 196px;
     height: 300px;
   }
 
-  .carta,
-  .reverso-baraja {
+  .seccion-principal__carta,
+  .seccion-principal__reverso-baraja {
     height: 300px;
     border-radius: 16px;
   }
 
-  .main-btns {
+  .seccion-principal__btns {
     flex-direction: row;
   }
 
-  .plantarse-btn {
+  .seccion-principal__plantarse-btn {
     margin-top: 0;
     margin-left: 8px;
   }
 
   /* Game over y mensaje plantarse */
-  .game-over-titulo,
-  .mensaje-final-titulo {
+  .game-over__titulo,
+  .mensaje-final__titulo {
     margin-bottom: 24px;
     font-size: 8rem;
   }
 
-  .mensaje-final-titulo {
+  .mensaje-final__titulo {
     margin-bottom: 16px;
   }
 
-  .mensaje-final-texto {
+  .mensaje-final__texto {
     margin-bottom: 48px;
     font-size: 2.5rem;
   }

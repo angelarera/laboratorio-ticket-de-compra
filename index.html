@@ -16,43 +16,46 @@
   </head>
   <body>
     <div class="puntuacion">
-      <h1 class="puntuacion-titulo">Tu puntuación</h1>
-      <div class="puntuacion-contenedor-numero">
-        <div class="puntuacion-numero"></div>
+      <h1 class="puntuacion__titulo">Tu puntuación</h1>
+      <div class="puntuacion__contenedor-numero">
+        <div class="puntuacion__numero"></div>
       </div>
     </div>
 
-    <div class="cartas-btns">
-      <div class="baraja-cartas">
-        <figure class="carta-contenedor">
-          <img class="carta" src="" alt="" />
+    <div class="seccion-principal">
+      <div class="seccion-principal__baraja-cartas">
+        <figure class="seccion-principal__carta-contenedor">
+          <img class="seccion-principal__carta" src="" alt="" />
         </figure>
 
         <img
-          class="reverso-baraja"
+          class="seccion-principal__reverso-baraja"
           src="https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/refs/heads/main/cartas/back.jpg"
           alt="Reverso de carta de baraja española"
         />
       </div>
-      <div class="main-btns">
-        <button class="pedir-btn">Pedir una carta</button>
-        <button class="plantarse-btn">Quiero plantarme <span>⚑</span></button>
+      <div class="seccion-principal__btns">
+        <button class="seccion-principal__pedir-btn">Pedir una carta</button>
+        <button class="seccion-principal__plantarse-btn">
+          Quiero plantarme <span>⚑</span>
+        </button>
       </div>
     </div>
 
     <div class="game-over">
-      <h2 class="game-over-titulo">Game over</h2>
-      <button class="nueva-partida-btn nueva-partida-btn--gameover">
+      <h2 class="game-over__titulo">Game over</h2>
+      <button class="game-over__nueva-partida-btn nueva-partida-btn">
         Empezar de nuevo
       </button>
     </div>
 
     <div class="mensaje-final">
-      <h2 class="mensaje-final-titulo">Te has plantado</h2>
-      <div class="mensaje-final-texto"></div>
-      <button class="nueva-partida-btn nueva-partida-btn--plantarse">
-        Empezar de nuevo
+      <h2 class="mensaje-final__titulo">Te has plantado</h2>
+      <div class="mensaje-final__texto"></div>
+      <button class="mensaje-final__nueva-partida-btn nueva-partida-btn">
+          Empezar de nuevo
       </button>
+      </div>
     </div>
 
     <script type="module" src="/src/main.ts"></script>

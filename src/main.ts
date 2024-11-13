@@ -1,6 +1,6 @@
 // MOSTRAR LA PUNTUACIÓN DEL USUARIO
 let puntuacion: number = 0;
-const elementoPuntuacion = document.querySelector(".puntuacion-numero");
+const elementoPuntuacion = document.querySelector(".puntuacion__numero");
 
 const muestraPuntuacion = () => {
   if (elementoPuntuacion) {
@@ -30,7 +30,7 @@ const pedirCarta = (): number => {
   return numeroCarta;
 };
 
-const pedirBtn = document.querySelector(".pedir-btn");
+const pedirBtn = document.querySelector(".seccion-principal__pedir-btn");
 
 if (pedirBtn !== null && pedirBtn instanceof HTMLButtonElement) {
   pedirBtn.addEventListener("click", () => {
@@ -43,7 +43,7 @@ if (pedirBtn !== null && pedirBtn instanceof HTMLButtonElement) {
 }
 
 // MOSTRAR CARTA
-const imagenCarta = document.querySelector(".carta");
+const imagenCarta = document.querySelector(".seccion-principal__carta");
 
 const mostrarCarta = (numeroCarta: number): void => {
   if (imagenCarta !== null && imagenCarta instanceof HTMLImageElement) {
@@ -141,7 +141,7 @@ const gameOver = () => {
 const contenedorMensajeFinal = document.querySelector(".mensaje-final");
 
 const mostrarMensajeFinal = () => {
-  const elementoMensajeFinal = document.querySelector(".mensaje-final-texto");
+  const elementoMensajeFinal = document.querySelector(".mensaje-final__texto");
 
   if (
     elementoMensajeFinal !== null &&
@@ -182,7 +182,9 @@ const mostrarMensajeFinal = () => {
 };
 
 const quieroPlantarme = () => {
-  const plantarseBtn = document.querySelector(".plantarse-btn");
+  const plantarseBtn = document.querySelector(
+    ".seccion-principal__plantarse-btn"
+  );
 
   if (plantarseBtn !== null && plantarseBtn instanceof HTMLButtonElement) {
     plantarseBtn.addEventListener("click", () => {
@@ -222,7 +224,7 @@ const reiniciarPartida = () => {
 };
 
 const nuevaPartidaBtnGameOver = document.querySelector(
-  ".nueva-partida-btn--gameover"
+  ".game-over__nueva-partida-btn"
 );
 
 if (
@@ -235,7 +237,7 @@ if (
 }
 
 const nuevaPartidaBtnPlantarse = document.querySelector(
-  ".nueva-partida-btn--plantarse"
+  ".mensaje-final__nueva-partida-btn"
 );
 
 if (
