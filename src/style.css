@@ -19,6 +19,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -49,9 +50,11 @@ h1 {
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vanilla:hover {
   filter: drop-shadow(0 0 2em #3178c6aa);
 }
@@ -75,9 +78,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -88,10 +93,206 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
+}
+
+/*/////// MI CSS ///////*/
+body {
+  background-image: url(img/pool_table.png);
+  flex-direction: column;
+}
+
+/* Puntuación */
+.puntuacion {
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.puntuacion-titulo {
+  margin: 24px 0 16px 0;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: white;
+}
+
+.puntuacion-contenedor-numero {
+  width: 200px;
+  height: 125px;
+  background-color: white;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.puntuacion-numero {
+  font: 700 6rem/125% 'Rubik', sans-serif;
+  color: black;
+}
+
+/* Baraja y botones principales */
+.cartas-btns {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.baraja-cartas {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.carta-contenedor {
+  width: 144px;
+  height: 220px;
+  /* Le he puesto a este elemento el tamaño de la carta que hay en su interior, para que cuando esté vacío porque aún no se ha sacado ninguna mantenga el tamaño que tiene cuando sí que se ha sacado */
+  margin: 0;
+  margin-right: 16px;
+  padding: 16px;
+  border: 2px dashed white;
+  border-radius: 16px;
+}
+
+.carta,
+.reverso-baraja {
+  height: 220px;
+  border-radius: 12px;
+}
+
+.main-btns {
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pedir-btn,
+.plantarse-btn,
+.nueva-partida-btn {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.plantarse-btn {
+  margin-top: 8px;
+  color: white;
+  background-color: black;
+}
+
+.plantarse-btn span {
+  margin-left: 4px;
+}
+
+/* Game over y mensaje plantarse */
+.game-over,
+.mensaje-final {
+  position: fixed;
+  height: 0;
+  width: 100dvw;
+  background-color: black;
+  z-index: 1;
+}
+
+.mensaje-final {
+  background-color: #1f81ff;
+}
+
+.game-over-titulo,
+.mensaje-final-titulo {
+  margin: 120px 0 16px 0;
+  color: #ff3c3c;
+  font: 700 6.5rem/100% 'Rubik', sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0;
+}
+
+.mensaje-final-titulo {
+  margin-bottom: 8px;
+  font-size: 4rem;
+  color: black;
+}
+
+.mensaje-final-texto {
+  margin-bottom: 32px;
+  color: black;
+  font: 500 2rem/100% 'Rubik', sans-serif;
+  text-align: center;
+  opacity: 0;
+}
+
+.nueva-partida-btn {
+  opacity: 0;
+}
+
+.game-over.game-over--desplegado,
+.mensaje-final.mensaje-final--desplegado {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: height 0.7s ease-in-out;
+}
+
+.game-over--desplegado .game-over-titulo,
+.game-over--desplegado .nueva-partida-btn,
+.mensaje-final--desplegado .mensaje-final-titulo,
+.mensaje-final--desplegado .nueva-partida-btn,
+.mensaje-final--desplegado .mensaje-final-texto {
+  opacity: 1;
+  transition: opacity 1.3s 0.4s ease-in-out;
+}
+
+@media (min-width: 768px) {
+
+  /* Baraja y botones principales */
+  .carta-contenedor {
+    width: 196px;
+    height: 300px;
+  }
+
+  .carta,
+  .reverso-baraja {
+    height: 300px;
+    border-radius: 16px;
+  }
+
+  .main-btns {
+    flex-direction: row;
+  }
+
+  .plantarse-btn {
+    margin-top: 0;
+    margin-left: 8px;
+  }
+
+  /* Game over y mensaje plantarse */
+  .game-over-titulo,
+  .mensaje-final-titulo {
+    margin-bottom: 24px;
+    font-size: 8rem;
+  }
+
+  .mensaje-final-titulo {
+    margin-bottom: 16px;
+  }
+
+  .mensaje-final-texto {
+    margin-bottom: 48px;
+    font-size: 2.5rem;
+  }
+
 }

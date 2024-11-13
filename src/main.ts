@@ -1,9 +1,8 @@
 // MOSTRAR LA PUNTUACIÓN DEL USUARIO
 let puntuacion: number = 0;
+const elementoPuntuacion = document.querySelector(".puntuacion-numero");
 
 const muestraPuntuacion = () => {
-  const elementoPuntuacion = document.getElementById("puntuacion");
-
   if (elementoPuntuacion) {
     elementoPuntuacion.innerHTML = `${puntuacion}`;
   } else {
@@ -14,9 +13,10 @@ const muestraPuntuacion = () => {
 };
 
 // PEDIR CARTA
+const numerosGenerados = new Set<number>(); // Conjunto para almacenar los números que ya han salido y que no se pueda repetir una misma carta
+
 const pedirCarta = (): number => {
   let numeroCarta;
-  const numerosGenerados = new Set<number>(); // Conjunto para almacenar los números que ya han salido y que no se pueda repetir una misma carta
 
   do {
     numeroCarta = Math.floor(Math.random() * 10) + 1; // Multiplicando *10 conseguiríamos un número entre el 0 y el 10 sin incluir el 10. Sumando +1 incluimos el 10 y excluimos el 0
@@ -30,7 +30,7 @@ const pedirCarta = (): number => {
   return numeroCarta;
 };
 
-const pedirBtn = document.getElementById("pedir-btn");
+const pedirBtn = document.querySelector(".pedir-btn");
 
 if (pedirBtn !== null && pedirBtn instanceof HTMLButtonElement) {
   pedirBtn.addEventListener("click", () => {
@@ -43,9 +43,9 @@ if (pedirBtn !== null && pedirBtn instanceof HTMLButtonElement) {
 }
 
 // MOSTRAR CARTA
-const mostrarCarta = (numeroCarta: number): void => {
-  const imagenCarta = document.getElementById("carta");
+const imagenCarta = document.querySelector(".carta");
 
+const mostrarCarta = (numeroCarta: number): void => {
   if (imagenCarta !== null && imagenCarta instanceof HTMLImageElement) {
     // Equivalencia de cada número con la carta que le correspondería como imagen
     switch (numeroCarta) {
@@ -120,15 +120,15 @@ const actualizarPuntuacion = (carta: number) => {
 };
 
 // GAME OVER
-const gameOver = () => {
-  const elementoGameOver = document.getElementById("game-over");
+const elementoGameOver = document.querySelector(".game-over");
 
+const gameOver = () => {
   if (puntuacion > 7.5) {
     if (pedirBtn !== null && pedirBtn instanceof HTMLButtonElement) {
-      pedirBtn.disabled = true;
+      pedirBtn.disabled = true; // He deshabilitado el botón por cumplir con las condiciones de la práctica, aunque en este caso no sería estrictamente necesario deshabilitarlo porque lo tapa el game over
     }
     if (elementoGameOver) {
-      elementoGameOver.innerText = "Game over";
+      elementoGameOver.classList.add("game-over--desplegado"); // Si se da el game over, se añade esta class que establece los estilos que hacen que el game over se despliegue
     } else {
       console.error(
         "gameOver: No se ha encontrado el elemento con el id game-over"
@@ -139,19 +139,23 @@ const gameOver = () => {
 
 // ME PLANTO
 const mostrarMensajeFinal = () => {
-  const elementoMensajeFinal = document.getElementById("mensaje-final");
+  const elementoMensajeFinal = document.querySelector(".mensaje-final-texto");
+  const contenedorMensajeFinal = document.querySelector(".mensaje-final");
 
-  if (elementoMensajeFinal) {
+  if (
+    elementoMensajeFinal !== null &&
+    elementoMensajeFinal instanceof HTMLDivElement
+  ) {
     switch (
       true // Usamos switch (true) para expresar booleanos
     ) {
-      case puntuacion < 4:
+      case puntuacion <= 4:
         elementoMensajeFinal.innerText = "Has sido muy conservador";
         break;
-      case puntuacion === 5:
+      case puntuacion <= 5:
         elementoMensajeFinal.innerText = "Te ha entrado el canguelo eh?";
         break;
-      case puntuacion === 6 || puntuacion === 7:
+      case puntuacion <= 7:
         elementoMensajeFinal.innerText = "Casi, casi...";
         break;
       case puntuacion === 7.5:
@@ -166,10 +170,18 @@ const mostrarMensajeFinal = () => {
       "mostrarMensajeFinal: No se ha encontrado el elemento con id mensaje-final"
     );
   }
+
+  if (contenedorMensajeFinal) {
+    contenedorMensajeFinal.classList.add("mensaje-final--desplegado"); // Añade la class .mensaje-final--desplegado que establece los estilos que hacen que el game over se despliegue
+  } else {
+    console.error(
+      "contenedorMensajeFinal: No se ha encontrado el elemento con id mensaje-final"
+    );
+  }
 };
 
 const quieroPlantarme = () => {
-  const plantarseBtn = document.getElementById("plantarse-btn");
+  const plantarseBtn = document.querySelector(".plantarse-btn");
 
   if (plantarseBtn !== null && plantarseBtn instanceof HTMLButtonElement) {
     plantarseBtn.addEventListener("click", () => {
@@ -179,3 +191,35 @@ const quieroPlantarme = () => {
 };
 
 quieroPlantarme();
+
+// REINICIAR PARTIDA
+const reiniciarPartida = () => {
+  puntuacion = 0;
+  numerosGenerados.clear(); // Vacía el conjunto de números generados
+
+  if (pedirBtn !== null && pedirBtn instanceof HTMLButtonElement) {
+    pedirBtn.disabled = false; // Vuelve a habilitar el botón que habíamos desactivado previamente
+  }
+
+  if (elementoGameOver) {
+    elementoGameOver.classList.remove("game-over--desplegado"); // Elimina la class que desplegaba el game over
+  }
+
+  if (elementoPuntuacion) {
+    elementoPuntuacion.innerHTML = ""; // Vacía el marcador de puntosOlvida
+  }
+
+  if (imagenCarta !== null && imagenCarta instanceof HTMLImageElement) {
+    // Elimina la imagen de la última carta que se sacó antes de reiniciar la partida
+    imagenCarta.src = "";
+    imagenCarta.alt = "";
+  }
+};
+
+const nuevaPartidaBtn = document.querySelector(".nueva-partida-btn");
+
+if (nuevaPartidaBtn !== null && nuevaPartidaBtn instanceof HTMLButtonElement) {
+  nuevaPartidaBtn.addEventListener("click", () => {
+    reiniciarPartida();
+  });
+}

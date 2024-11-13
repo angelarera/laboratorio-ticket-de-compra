@@ -2,22 +2,55 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="stylesheet" href="./src/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
   </head>
   <body>
-    <div id="puntuacion"></div>
-    <button id="pedir-btn">Pedir una carta</button>
-    <img
-      id="carta"
-      src="https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/refs/heads/main/cartas/back.jpg"
-      alt="Reverso de carta de baraja española"
-    />
-    <div id="game-over"></div>
-    <button id="plantarse-btn">Quiero plantarme</button>
-    <div id="mensaje-final"></div>
+    <div class="puntuacion">
+      <h1 class="puntuacion-titulo">Tu puntuación</h1>
+      <div class="puntuacion-contenedor-numero">
+        <div class="puntuacion-numero"></div>
+      </div>
+    </div>
+
+    <div class="cartas-btns">
+      <div class="baraja-cartas">
+        <figure class="carta-contenedor">
+          <img class="carta" src="" alt="" />
+        </figure>
+
+        <img
+          class="reverso-baraja"
+          src="https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/refs/heads/main/cartas/back.jpg"
+          alt="Reverso de carta de baraja española"
+        />
+      </div>
+      <div class="main-btns">
+        <button class="pedir-btn">Pedir una carta</button>
+        <button class="plantarse-btn">Quiero plantarme <span>⚑</span></button>
+      </div>
+    </div>
+
+    <div class="game-over">
+      <h2 class="game-over-titulo">Game over</h2>
+      <button class="nueva-partida-btn">Empezar de nuevo</button>
+    </div>
+
+    <div class="mensaje-final">
+      <h2 class="mensaje-final-titulo">Te has plantado</h2>
+      <div class="mensaje-final-texto"></div>
+      <button class="nueva-partida-btn">Empezar de nuevo</button>
+    </div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
