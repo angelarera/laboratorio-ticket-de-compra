@@ -225,12 +225,9 @@ const reiniciarImagenCarta = () => {
   }
 };
 
-const reiniciarPartida = () => {
-  puntuacion = 0;
-  numerosGenerados.clear(); // Vacía el conjunto de números generados
-
+const reiniciarInterfazPartida = () => {
   if (pedirBtn !== null && pedirBtn instanceof HTMLButtonElement) {
-    pedirBtn.disabled = false; // Vuelve a habilitar el botón que habíamos desactivado previamente
+    pedirBtn.disabled = false; // Habilita el botón de pedir carta
   }
 
   // Restaurar los elementos del DOM
@@ -246,6 +243,16 @@ const reiniciarPartida = () => {
 
   reiniciarPuntuacion();
   reiniciarImagenCarta();
+};
+
+const reiniciarModeloPartida = () => {
+  puntuacion = 0;
+  numerosGenerados.clear();
+};
+
+const reiniciarPartida = () => {
+  reiniciarModeloPartida();
+  reiniciarInterfazPartida();
 };
 
 // Aplicar reiniciarPartida a los botones que inician una nueva partida en cada pantalla que se puede encontrar el jugador
