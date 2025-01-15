@@ -1,16 +1,15 @@
+import { partida, reiniciarModeloPartida } from "./modelo";
+
 import {
-  partida,
   obtenerNumeroAleatorio,
   obtenerNumeroCarta,
   obtenerPuntosCarta,
   sumarPuntuacion,
   actualizarPuntuacion,
-  reiniciarModeloPartida,
-} from "./modelo";
-
-import { pedirCarta } from "./motor";
+} from "./motor";
 
 import {
+  pedirCarta,
   muestraPuntuacion,
   pintarUrlCarta,
   obtenerUrlCarta,

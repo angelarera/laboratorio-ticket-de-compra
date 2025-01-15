@@ -1,9 +1,25 @@
+import { partida } from "./modelo";
 import {
-  partida,
+  obtenerNumeroAleatorio,
+  obtenerNumeroCarta,
   verificarGameOver,
   obtenerMensajeFinal,
   obtenerMensajeFuturo,
-} from "./modelo";
+} from "./motor";
+
+// PEDIR CARTA
+export const pedirCarta = (): number => {
+  let numeroCarta: number;
+
+  do {
+    const numeroAleatorio = obtenerNumeroAleatorio();
+    numeroCarta = obtenerNumeroCarta(numeroAleatorio);
+  } while (partida.numerosGenerados.has(numeroCarta));
+
+  partida.numerosGenerados.add(numeroCarta);
+
+  return numeroCarta;
+};
 
 // MOSTRAR LA PUNTUACIÓN DEL USUARIO
 const elementoPuntuacion = document.querySelector(".puntuacion__numero");
