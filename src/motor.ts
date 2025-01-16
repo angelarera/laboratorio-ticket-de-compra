@@ -37,28 +37,26 @@ export const verificarGameOver = (puntuacion: number): boolean => {
 
 // ME PLANTO
 export const obtenerMensajeFinal = (puntuacion: number) => {
-  switch (true) {
-    case puntuacion <= 4:
-      return "Has sido muy conservador";
-    case puntuacion <= 5:
-      return "Te ha entrado el canguelo eh?";
-    case puntuacion <= 7:
-      return "Casi, casi...";
-    case puntuacion === 7.5:
-      return "¡Lo has clavado!¡Enhorabuena!";
-    default:
-      return `Tu puntuación final es ${puntuacion}.`;
+  if (puntuacion <= 4) {
+    return "Has sido muy conservador";
+  } else if (puntuacion <= 5) {
+    return "Te ha entrado el canguelo eh?";
+  } else if (puntuacion <= 7) {
+    return "Casi, casi...";
+  } else if (puntuacion === 7.5) {
+    return "¡Lo has clavado!¡Enhorabuena!";
+  } else {
+    return `Tu puntuación final es ${puntuacion}.`;
   }
 };
 
 // QUÉ HABRÍA PASADO
 export const obtenerMensajeFuturo = (puntuacion: number) => {
-  switch (true) {
-    case puntuacion === 7.5:
-      return "¡Lo habrías clavado!¡El que no arriesga no gana!";
-    case puntuacion > 7.5:
-      return "Habrías superado el 7,5. A veces vale más una retirada a tiempo.";
-    default:
-      return `Tu puntuación final es ${puntuacion}.`;
+  if (puntuacion === 7.5) {
+    return "¡Lo habrías clavado!¡El que no arriesga no gana!";
+  } else if (puntuacion > 7.5) {
+    return "Habrías superado el 7,5. A veces vale más una retirada a tiempo.";
+  } else {
+    return `Tu puntuación final es ${puntuacion}.`;
   }
 };

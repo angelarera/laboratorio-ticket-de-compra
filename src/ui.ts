@@ -1,14 +1,18 @@
-import { partida } from "./modelo";
+import { partida, reiniciarModeloPartida } from "./modelo";
+
 import {
   obtenerNumeroAleatorio,
   obtenerNumeroCarta,
+  obtenerPuntosCarta,
+  sumarPuntuacion,
+  actualizarPuntuacion,
   verificarGameOver,
   obtenerMensajeFinal,
   obtenerMensajeFuturo,
 } from "./motor";
 
 // PEDIR CARTA
-export const pedirCarta = (): number => {
+const pedirCarta = (): number => {
   let numeroCarta: number;
 
   do {
@@ -21,9 +25,21 @@ export const pedirCarta = (): number => {
   return numeroCarta;
 };
 
+export const funcionPedirCarta = () => {
+  const numeroAleatorio = obtenerNumeroAleatorio();
+  const carta = obtenerNumeroCarta(numeroAleatorio); // Obtenemos el número de la carta aleatoriamente
+  const urlCarta = obtenerUrlCarta(carta); // Sustituimos la imagen de la carta con la que corresponda al número obtenido
+  pintarUrlCarta(urlCarta);
+  const puntuacionCarta = obtenerPuntosCarta(carta);
+  const puntosSumados = sumarPuntuacion(puntuacionCarta); // Obtenemos los puntos que vale la carta
+  actualizarPuntuacion(puntosSumados); // Actualizamos la puntuación con el valor de la carta obtenida
+  muestraPuntuacion(); // Mostramos la puntuación en el div puntuacion
+  gameOver(partida.puntuacion); // Verificamos si el jugador ha superado los 7.5 puntos
+};
+
 // MOSTRAR LA PUNTUACIÓN DEL USUARIO
 const elementoPuntuacion = document.querySelector(".puntuacion__numero");
-export const muestraPuntuacion = () => {
+const muestraPuntuacion = () => {
   if (elementoPuntuacion && elementoPuntuacion instanceof HTMLDivElement) {
     elementoPuntuacion.innerHTML = `${partida.puntuacion}`;
   } else {
@@ -35,13 +51,13 @@ export const muestraPuntuacion = () => {
 
 // MOSTRAR CARTA
 const elementoImg = document.querySelector(".seccion-principal__carta");
-export const pintarUrlCarta = (urlCarta: string) => {
+const pintarUrlCarta = (urlCarta: string) => {
   if (elementoImg && elementoImg instanceof HTMLImageElement) {
     elementoImg.src = urlCarta;
   }
 };
 
-export const obtenerUrlCarta = (numeroCarta: number): string => {
+const obtenerUrlCarta = (numeroCarta: number): string => {
   // Equivalencia de cada número con la carta que le correspondería como imagen
   switch (numeroCarta) {
     case 1:
@@ -71,7 +87,7 @@ export const obtenerUrlCarta = (numeroCarta: number): string => {
 
 // GAME OVER
 const elementoGameOver = document.querySelector(".game-over");
-export const actualizarDOMGameOver = () => {
+const actualizarDOMGameOver = () => {
   const pedirBtn = document.querySelector(".seccion-principal__pedir-btn");
 
   // Deshabilitar el botón "Pedir carta"
@@ -87,14 +103,14 @@ export const actualizarDOMGameOver = () => {
   }
 };
 
-export const gameOver = (puntuacion: number) => {
+const gameOver = (puntuacion: number) => {
   if (verificarGameOver(puntuacion)) {
     actualizarDOMGameOver();
   }
 };
 
 // ME PLANTO
-export const actualizarMensajeFinal = (mensaje: string) => {
+const actualizarMensajeFinal = (mensaje: string) => {
   const elementoMensajeFinal = document.querySelector(".mensaje-final__texto");
 
   if (
@@ -109,8 +125,8 @@ export const actualizarMensajeFinal = (mensaje: string) => {
   }
 };
 
-export const contenedorMensajeFinal = document.querySelector(".mensaje-final");
-export const mostrarContenedorMensajeFinal = () => {
+const contenedorMensajeFinal = document.querySelector(".mensaje-final");
+const mostrarContenedorMensajeFinal = () => {
   if (
     contenedorMensajeFinal &&
     contenedorMensajeFinal instanceof HTMLDivElement
@@ -131,10 +147,7 @@ export const mostrarMensajeFinal = () => {
 
 // REINICIAR PARTIDA
 // Función para restaurar la visibilidad de elementos en el DOM
-export const restaurarElemento = (
-  elemento: HTMLElement | null,
-  clase: string
-) => {
+const restaurarElemento = (elemento: HTMLElement | null, clase: string) => {
   if (elemento && elemento instanceof HTMLDivElement) {
     elemento.classList.remove(clase);
   } else {
@@ -144,20 +157,20 @@ export const restaurarElemento = (
   }
 };
 
-export const reiniciarPuntuacion = () => {
+const reiniciarPuntuacion = () => {
   if (elementoPuntuacion && elementoPuntuacion instanceof HTMLDivElement) {
     elementoPuntuacion.innerHTML = ""; // Vacía el marcador de puntos
   }
 };
 
-export const reiniciarImagenCarta = () => {
+const reiniciarImagenCarta = () => {
   if (elementoImg !== null && elementoImg instanceof HTMLImageElement) {
     elementoImg.src = "";
   }
 };
 
-export const pedirBtn = document.querySelector(".seccion-principal__pedir-btn");
-export const reiniciarInterfazPartida = () => {
+const pedirBtn = document.querySelector(".seccion-principal__pedir-btn");
+const reiniciarInterfazPartida = () => {
   if (pedirBtn !== null && pedirBtn instanceof HTMLButtonElement) {
     pedirBtn.disabled = false; // Habilita el botón de pedir carta
   }
@@ -177,8 +190,53 @@ export const reiniciarInterfazPartida = () => {
   reiniciarImagenCarta();
 };
 
+const reiniciarPartida = () => {
+  reiniciarModeloPartida();
+  reiniciarInterfazPartida();
+};
+
+// Aplicar reiniciarPartida a los botones que inician una nueva partida en cada pantalla que se puede encontrar el jugador
+const nuevaPartidaBtnGameOver = document.querySelector(
+  ".game-over__nueva-partida-btn"
+);
+
+if (
+  nuevaPartidaBtnGameOver !== null &&
+  nuevaPartidaBtnGameOver instanceof HTMLButtonElement
+) {
+  nuevaPartidaBtnGameOver.addEventListener("click", () => {
+    reiniciarPartida();
+  });
+}
+
+const nuevaPartidaBtnPlantarse = document.querySelector(
+  ".mensaje-final__nueva-partida-btn"
+);
+
+if (
+  nuevaPartidaBtnPlantarse !== null &&
+  nuevaPartidaBtnPlantarse instanceof HTMLButtonElement
+) {
+  nuevaPartidaBtnPlantarse.addEventListener("click", () => {
+    reiniciarPartida();
+  });
+}
+
+const nuevaPartidaBtnQueHabriaPasado = document.querySelector(
+  ".que-habria-pasado__nueva-partida-btn"
+);
+
+if (
+  nuevaPartidaBtnQueHabriaPasado !== null &&
+  nuevaPartidaBtnQueHabriaPasado instanceof HTMLButtonElement
+) {
+  nuevaPartidaBtnQueHabriaPasado.addEventListener("click", () => {
+    reiniciarPartida();
+  });
+}
+
 // QUÉ HABRÍA PASADO
-export const mostrarMensajeFuturo = () => {
+const mostrarMensajeFuturo = () => {
   const queHabriaPasado = document.querySelector(".que-habria-pasado__texto");
 
   if (queHabriaPasado !== null && queHabriaPasado instanceof HTMLDivElement) {
@@ -190,7 +248,7 @@ export const mostrarMensajeFuturo = () => {
   }
 };
 
-export const habilitarBotonPedirCarta = () => {
+const habilitarBotonPedirCarta = () => {
   const pedirBtn = document.querySelector(".seccion-principal__pedir-btn");
 
   if (pedirBtn !== null && pedirBtn instanceof HTMLButtonElement) {
@@ -199,7 +257,7 @@ export const habilitarBotonPedirCarta = () => {
 };
 
 const elementoQueHabriaPasado = document.querySelector(".que-habria-pasado");
-export const desplegarQueHabriaPasado = () => {
+const desplegarQueHabriaPasado = () => {
   if (
     elementoQueHabriaPasado !== null &&
     elementoQueHabriaPasado instanceof HTMLDivElement
@@ -210,4 +268,48 @@ export const desplegarQueHabriaPasado = () => {
       "queHabriaPasado: No se ha encontrado el elemento que-habria-pasado"
     );
   }
+};
+
+// QUÉ HABRÍA PASADO
+const pedirCartaQueHabriaPasado = () => {
+  const carta = pedirCarta();
+  const urlCarta = obtenerUrlCarta(carta);
+  pintarUrlCarta(urlCarta);
+  const puntuacionCarta = obtenerPuntosCarta(carta);
+  const puntosSumados = sumarPuntuacion(puntuacionCarta);
+  actualizarPuntuacion(puntosSumados);
+  muestraPuntuacion();
+
+  if (partida.puntuacion >= 7.5) {
+    clearInterval(intervalId); // Para el intervalo si la puntuación alcanza 7.5 o lo supera
+    desplegarQueHabriaPasado();
+    mostrarMensajeFuturo();
+  }
+};
+
+// Función para el intervalo que va enseñando las cartas que habrían salido
+let intervalId: number | undefined; // Declara un intervalo que usaremos para pulsar el botón de pedir carta y mostrar las que habrían salido de seguir jugando
+const iniciarIntervalo = () => {
+  if (intervalId === undefined && partida.puntuacion < 7.5) {
+    intervalId = window.setInterval(() => {
+      pedirCartaQueHabriaPasado();
+    }, 1000);
+  }
+};
+
+// Lógica principal del qué habría pasado
+export const queHabriaPasado = () => {
+  habilitarBotonPedirCarta();
+  pedirCartaQueHabriaPasado();
+
+  // Agrega una clase para hacer visibles las cartas del futuro
+  if (contenedorMensajeFinal) {
+    contenedorMensajeFinal.classList.add("mensaje-final--viendo-futuro");
+  } else {
+    console.error(
+      "contenedorMensajeFinal: No se ha encontrado el elemento con class mensaje-final"
+    );
+  }
+
+  iniciarIntervalo(); // Inicia el intervalo para seguir pidiendo cartas
 };
