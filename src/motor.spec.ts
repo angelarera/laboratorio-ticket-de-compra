@@ -1,5 +1,5 @@
 import { vi } from "vitest";
-import { partida, reiniciarModeloPartida } from "./modelo";
+import { partida } from "./modelo";
 import {
   actualizarPuntuacion,
   obtenerMensajeFinal,
@@ -85,6 +85,17 @@ describe("comprobarVictoriaPartida", () => {
     expect(resultado).toBe(puntosEsperados);
   });
 
+  it("La puntuación del usuario se actualiza", () => {
+    // Arrange
+    const nuevosPuntos: number = 2;
+
+    // Act
+    actualizarPuntuacion(nuevosPuntos);
+
+    // Assert
+    expect(partida.puntuacion).toBe(nuevosPuntos);
+  });
+
   it("La carta obtenida se suma a la puntuación del jugador", () => {
     // Arrange
     const cartaObtenida: number = 2;
@@ -95,18 +106,6 @@ describe("comprobarVictoriaPartida", () => {
 
     // Assert
     expect(resultado).toBe(cartaObtenida);
-  });
-
-  // TODO: Arreglar este test, que es el único que no se pasa
-  it("La puntuación del usuario se actualiza", () => {
-    // Arrange
-    const nuevosPuntos: number = 2;
-
-    // Act
-    actualizarPuntuacion(nuevosPuntos);
-
-    // Assert
-    expect(partida.puntuacion).toBe(nuevosPuntos);
   });
 
   it("El usuario no ha superado los 7.5 puntos, por lo que aún no ha perdido la partida", () => {
