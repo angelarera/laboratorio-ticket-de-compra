@@ -1,1 +1,3 @@
-import "./shell";
+import "./style.css";
+
+import "./calcula-ticket";

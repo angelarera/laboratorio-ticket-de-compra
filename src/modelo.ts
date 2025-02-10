@@ -1,16 +1,43 @@
-// PUNTUACION
-interface Partida {
-  puntuacion: number;
-  numerosGenerados: Set<number>;
+type TipoIva =
+  | "general"
+  | "reducido"
+  | "superreducidoA"
+  | "superreducidoB"
+  | "superreducidoC"
+  | "sinIva";
+
+interface Producto {
+  nombre: string;
+  precio: number;
+  tipoIva: TipoIva;
 }
 
-export const partida: Partida = {
-  puntuacion: 0,
-  numerosGenerados: new Set<number>(),
-};
+interface LineaTicket {
+  producto: Producto;
+  cantidad: number;
+}
 
-// REINICIAR PARTIDA
-export const reiniciarModeloPartida = () => {
-  partida.puntuacion = 0;
-  partida.numerosGenerados.clear();
-};
+interface ResultadoLineaTicket {
+  nombre: string;
+  cantidad: number;
+  precionSinIva: number;
+  tipoIva: TipoIva;
+  precioConIva: number;
+}
+
+interface ResultadoTotalTicket {
+  totalSinIva: number;
+  totalConIva: number;
+  totalIva: number;
+}
+
+interface TotalPorTipoIva {
+  tipoIva: TipoIva;
+  cuantia: number;
+}
+
+interface TicketFinal {
+  lineas: ResultadoLineaTicket[];
+  total: ResultadoTotalTicket;
+  desgloseIva: TotalPorTipoIva[];
+}

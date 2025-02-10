@@ -2,77 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-      rel="stylesheet"
-    />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="./src/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
   </head>
   <body>
-    <div class="puntuacion">
-      <h1 class="puntuacion__titulo">Tu puntuación</h1>
-      <div class="puntuacion__contenedor-numero">
-        <div class="puntuacion__numero"></div>
-      </div>
+    <div id="app">
+      <h1>TypeScript Sandbox</h1>
     </div>
-
-    <div class="seccion-principal">
-      <div class="seccion-principal__baraja-cartas">
-        <figure class="seccion-principal__carta-contenedor">
-          <img class="seccion-principal__carta" src="" alt="" />
-        </figure>
-
-        <img
-          class="seccion-principal__reverso-baraja"
-          src="https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/refs/heads/main/cartas/back.jpg"
-          alt="Reverso de carta de baraja española"
-        />
-      </div>
-      <div class="seccion-principal__btns">
-        <button class="seccion-principal__pedir-btn">Pedir una carta</button>
-        <button class="seccion-principal__plantarse-btn">
-          Quiero plantarme <span>⚑</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="game-over">
-      <h2 class="game-over__titulo">Game over</h2>
-      <button class="game-over__nueva-partida-btn nueva-partida-btn">
-        Empezar de nuevo
-      </button>
-    </div>
-
-    <div class="mensaje-final">
-      <h2 class="mensaje-final__titulo">Te has plantado</h2>
-      <div class="mensaje-final__texto"></div>
-      <div class="mensaje-final__opciones">
-        <p class="mensaje-final__opciones-texto">Ahora tienes dos opciones:</p>
-        <div class="mensaje-final__btns">
-          <button class="mensaje-final__nueva-partida-btn nueva-partida-btn">
-            Empezar de nuevo
-          </button>
-          <button class="mensaje-final__futuro-btn">
-            Ver qué habría pasado
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="que-habria-pasado">
-      <h2 class="que-habria-pasado__titulo">¿Qué habría pasado?</h2>
-      <div class="que-habria-pasado__texto"></div>
-      <button class="que-habria-pasado__nueva-partida-btn nueva-partida-btn">
-        Empezar de nuevo
-      </button>
-    </div>
-
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
