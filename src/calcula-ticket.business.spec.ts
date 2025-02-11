@@ -4,7 +4,7 @@ import {
   calcularPrecioConIva,
   calcularTotalTicket,
   calcularDesglosePorTipoDeIva,
-} from "./calcula-ticket";
+} from "./calcula-ticket.business";
 
 describe("calcularPrecioSinIva", () => {
   it("el precio total del producto sin IVA es igual a su precio unitario multiplicado por el número de unidades del producto", () => {
